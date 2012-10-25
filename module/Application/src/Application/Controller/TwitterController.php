@@ -48,10 +48,10 @@ class TwitterController extends AbstractRestfulController
         //);
         $comeback = $comebacks[array_rand($comebacks)];
         
-        if (!isset($_SESSION['comebacks']))
-        	$_SESSION['comebacks'] = array();
-        
-        while (in_array($comeback, $_SESSION['comebacks']))
+        //if (!isset($_SESSION['comebacks']))
+        //	$_SESSION['comebacks'] = array();
+        //
+        //while (in_array($comeback, $_SESSION['comebacks']))
         //            
         //
         //$_SESSION['$comebacks[mt_rand(0, count($comebacks) - 1)]

@@ -32,21 +32,58 @@ class TwitterController extends AbstractRestfulController
      */
     public function get($id)
     {
-        $comebacks = array(
-            '(Leave walking backwards)',
-            '(Walk away) ',
-            '(Cry)',
-            'Nah dude.',
-            'Na na na na na na.',
-            'I\'m rubber, you\'re glue. Whatever you say bounces off me and and sticks to you.',
-            'Whatever.',
-            'Blah blah blah.',
-            'That\'s what she said.',
-            'So\'s your face! ',
-            'Oh yeah?',
-        );
+        $comebacks = $this->getHashtagComebacks();
+        //array(
+        //    '(Leave walking backwards)',
+        //    '(Walk away) ',
+        //    '(Cry)',
+        //    'Nah dude.',
+        //    'Na na na na na na.',
+        //    'I\'m rubber, you\'re glue. Whatever you say bounces off me and and sticks to you.',
+        //    'Whatever.',
+        //    'Blah blah blah.',
+        //    'That\'s what she said.',
+        //    'So\'s your face! ',
+        //    'Oh yeah?',
+        //);
         return $this->getResponse()->setContent($comebacks[mt_rand(0, count($comebacks) - 1)]);
     }
+    
+    /**
+     * Returns all the comebacks for the user @comebackgen
+     *
+     * @return array
+     */
+    public function getUserComebacks()
+	{
+		$str = file_get_contents('http://api.twitter.com/1/statuses/user_timeline.json?screen_name=comebackgen');
+		$arr = json_decode($str);
+	
+		$comebacks = array();
+		foreach ($arr as $obj)
+			$comebacks[] = $obj->text;
+		
+		return $comebacks;
+	}
+
+	/**
+     * Returns all the comebacks that are hashtagged #comebackgen
+     *
+     * @return array
+     */
+	public function getHashtagComebacks()
+	{
+		$str = file_get_contents('http://search.twitter.com/search.json?q=%23comebackgen');
+		$obj = json_decode($str);
+		
+		$comebacks = array();
+		foreach ($obj->results as $arr)
+		{
+			$str = str_replace('#comebackgen', '', $arr->text);
+			$comebacks[] = $str;
+		}
+		return $comebacks;
+	}
 
     /**
      * Create a new resource

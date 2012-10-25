@@ -32,7 +32,7 @@ class TwitterController extends AbstractRestfulController
      */
     public function get($id)
     {
-        $comebacks = $this->getHashtagComebacks2();
+        $comebacks = $this->getHashtagComebacks();
         //array(
         //    '(Leave walking backwards)',
         //    '(Walk away) ',

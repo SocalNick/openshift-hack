@@ -24,6 +24,9 @@
                     $("#comeback").html(resp);
                 }, 'html')
             }
+            window.onload = function() {
+            	getComeback();
+            }
         </script>
     </head>
     <body onorientationchange="getComeback()">

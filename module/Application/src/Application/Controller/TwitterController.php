@@ -46,7 +46,16 @@ class TwitterController extends AbstractRestfulController
         //    'So\'s your face! ',
         //    'Oh yeah?',
         //);
-        return $this->getResponse()->setContent($comebacks[mt_rand(0, count($comebacks) - 1)]);
+        
+        $comeback = array_rand($comebacks);
+        
+        //if (!isset($_SESSION['comebacks']))
+        //	$_SESSION['comebacks'] = array();
+        //
+        //
+        //$_SESSION['$comebacks[mt_rand(0, count($comebacks) - 1)]
+        
+        return $this->getResponse()->setContent($comeback);
     }
     
     /**

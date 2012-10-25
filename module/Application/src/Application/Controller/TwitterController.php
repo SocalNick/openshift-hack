@@ -83,26 +83,26 @@ class TwitterController extends AbstractRestfulController
      */
 	public function getHashtagComebacks()
 	{
-		//$str = file_get_contents('http://search.twitter.com/search.json?q=%23comebackgen');
-		//$obj = json_decode($str);
-		//
-		//$comebacks = array();
-		//foreach ($obj->results as $arr)
-		//{
-		//	$str = str_replace('#comebackgen', '', $arr->text);
-		//	$comebacks[] = $str;
-		//}
-		//return $comebacks;
+		$str = file_get_contents('http://search.twitter.com/search.json?q=%23comebackgen');
+		$obj = json_decode($str);
 		
-		$str = file_get_contents('http://wb.cba.ua.edu/comebackgen/get.php');
-		$arr = json_decode($str);
-		
-		foreach ($arr as $comeback)
+		$comebacks = array();
+		foreach ($obj->results as $arr)
 		{
-			$str = str_replace('#comebackgen', '', $comeback);
+			$str = str_replace('#comebackgen', '', $arr->text);
 			$comebacks[] = $str;
 		}
 		return $comebacks;
+		
+		//$str = file_get_contents('http://wb.cba.ua.edu/comebackgen/get.php');
+		//$arr = json_decode($str);
+		//
+		//foreach ($arr as $comeback)
+		//{
+		//	$str = str_replace('#comebackgen', '', $comeback);
+		//	$comebacks[] = $str;
+		//}
+		//return $comebacks;
 	}
 	
 	public function getHashtagComebacks2()

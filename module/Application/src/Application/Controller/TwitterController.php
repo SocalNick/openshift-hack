@@ -99,7 +99,7 @@ class TwitterController extends AbstractRestfulController
 	{
 		$ch = curl_init();
 		curl_setopt_array($ch, array(
-			CURLOPT_URL	=> 'http://search.twitter.com/search.json?q=%23comebackgen',
+			CURLOPT_URL	=> 'http://search.twitter.com/search.json',
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_HTTPHEADER => array(
 				'Accept: application/json'

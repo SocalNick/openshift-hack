@@ -32,7 +32,7 @@ class TwitterController extends AbstractRestfulController
      */
     public function get($id)
     {
-        $comebacks = $this->getHashtagComebacks();
+        $comebacks = $this->getHashtagComebacks2();
         //array(
         //    '(Leave walking backwards)',
         //    '(Walk away) ',
@@ -48,8 +48,10 @@ class TwitterController extends AbstractRestfulController
         //);
         $comeback = $comebacks[array_rand($comebacks)];
         
-        //if (!isset($_SESSION['comebacks']))
-        //	$_SESSION['comebacks'] = array();
+        if (!isset($_SESSION['comebacks']))
+        	$_SESSION['comebacks'] = array();
+        
+        while (in_array($comeback, $_SESSION['comebacks']))
         //            
         //
         //$_SESSION['$comebacks[mt_rand(0, count($comebacks) - 1)]
@@ -91,6 +93,32 @@ class TwitterController extends AbstractRestfulController
 			$comebacks[] = $str;
 		}
 		return $comebacks;
+	}
+	
+	public function getHashtagComebacks2()
+	{
+		$ch = curl_init();
+		curl_setopt_array($ch, array(
+			CURLOPT_URL	=> 'http://search.twitter.com/search.json?q=%23comebackgen',
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_HTTPHEADER => array(
+				'Accept: application/json'
+			),
+			CURLOPT_POSTFIELDS => array(
+				'q' => '%23comebackgen'
+			)
+		));
+		$str = curl_exec($ch);
+		
+		$obj = json_decode($str);
+		
+		$comebacks = array();
+		foreach ($obj->results as $arr)
+		{
+			$str = str_replace('#comebackgen', '', $arr->text);
+			$comebacks[] = $str;
+		}
+		return $comebacks;	
 	}
 
     /**

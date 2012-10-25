@@ -83,7 +83,8 @@ class TwitterController extends AbstractRestfulController
      */
 	public function getHashtagComebacks()
 	{
-		$str = file_get_contents('http://search.twitter.com/search.json?q=%23comebackgen');
+		//$str = file_get_contents('http://search.twitter.com/search.json?q=%23comebackgen');
+		$str = file_get_contents('http://wb.cba.ua.edu/comebackgen/get.php');
 		$obj = json_decode($str);
 		
 		$comebacks = array();

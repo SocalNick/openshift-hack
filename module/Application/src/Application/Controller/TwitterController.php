@@ -97,6 +97,7 @@ class TwitterController extends AbstractRestfulController
 		$str = file_get_contents('http://wb.cba.ua.edu/comebackgen/get.php');
 		$arr = json_decode($str);
 		
+		$comebacks = array();
 		foreach ($arr as $comeback)
 		{
 			$str = str_replace('#comebackgen', '', $comeback);
